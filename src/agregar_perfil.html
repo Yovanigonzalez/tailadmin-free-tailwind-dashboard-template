@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Agregar usuarios | Agua potable Jonetlan
+    </title>
+  </head>
+  <body
+    x-data="{ page: 'formElements', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
+    x-init="
+         darkMode = JSON.parse(localStorage.getItem('darkMode'));
+         $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+    :class="{'dark bg-gray-900': darkMode === true}"
+  >
+    <!-- ===== Preloader Start ===== -->
+    <include src="./partials/preloader.html"></include>
+    <!-- ===== Preloader End ===== -->
+
+    <!-- ===== Page Wrapper Start ===== -->
+    <div class="flex h-screen overflow-hidden">
+      <!-- ===== Sidebar Start ===== -->
+      <include src="./partials/sidebar.html"></include>
+      <!-- ===== Sidebar End ===== -->
+
+      <!-- ===== Content Area Start ===== -->
+      <div
+        class="relative flex flex-1 flex-col overflow-x-hidden overflow-y-auto"
+      >
+        <!-- Small Device Overlay Start -->
+        <include src="./partials/overlay.html" />
+        <!-- Small Device Overlay End -->
+
+        <!-- ===== Header Start ===== -->
+        <include src="./partials/header.html" />
+        <!-- ===== Header End ===== -->
+
+        <!-- ===== Main Content Start ===== -->
+        <main>
+          <div class="mx-auto max-w-(--breakpoint-2xl) p-4 md:p-6">
+            <!-- Breadcrumb Start -->
+            <div x-data="{ pageName: `Registro de usuario`}">
+              <include src="./partials/breadcrumb.html" />
+            </div>
+            <!-- Breadcrumb End -->
+
+<!-- ====== Form Elements Section Start -->
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+  <div class="space-y-6">
+    <div class="rounded-2xl border border-gray-200 bg-white">
+      <div class="px-5 py-4 sm:px-6 sm:py-5">
+        <h3 align="center" class="text-base font-medium text-gray-800">
+          Datos del usuario
+        </h3>
+      </div>
+
+      <div class="space-y-6 border-t border-gray-100 p-5 sm:p-6">
+
+        <div x-data="formTomas()" class="space-y-6">
+
+          <!-- Nombre completo -->
+          <div>
+            <label class="block mb-1.5 text-sm font-medium text-gray-700">
+              Nombre Completo
+            </label>
+            <input type="text"
+              class="h-11 w-full rounded-lg border px-4 focus:border-blue-300 focus:ring-blue-500/20" />
+          </div>
+
+          <!-- Teléfono -->
+          <div>
+            <label class="block mb-1.5 text-sm font-medium text-gray-700">
+              Número de Teléfono
+            </label>
+            <input type="tel"
+              class="h-11 w-full rounded-lg border px-4 focus:border-blue-300 focus:ring-blue-500/20" />
+          </div>
+
+          <!-- Correo electrónico -->
+          <div>
+            <label class="block mb-1.5 text-sm font-medium text-gray-700">
+              Correo Electrónico
+            </label>
+            <input type="email"
+              class="h-11 w-full rounded-lg border px-4 focus:border-blue-300 focus:ring-blue-500/20" />
+          </div>
+
+          <!-- Tipos de tomas -->
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">
+              Tipo de Tomas
+            </label>
+
+            <div class="flex items-center space-x-4">
+              <!-- Usuario -->
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" x-model="usarUsuario">
+                <span>Usuario</span>
+              </label>
+
+              <!-- Hidrante -->
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" x-model="usarHidrante">
+                <span>Hidrante</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Cantidad de tomas de usuario -->
+          <div x-show="usarUsuario">
+            <label class="block mb-1.5 text-sm font-medium text-gray-700">
+              Cantidad de Tomas Usuario
+            </label>
+            <input type="number" min="1" x-model.number="cantidadUsuario"
+              class="h-11 w-32 rounded-lg border px-4 focus:border-blue-300 focus:ring-blue-500/20" />
+
+            <!-- Campos dinámicos de usuario -->
+            <template x-for="i in cantidadUsuario" :key="i">
+              <div class="mt-2">
+                <label class="text-sm text-gray-600">
+                  Dirección de Usuario #<span x-text="i"></span>
+                </label>
+                <input type="text"
+                  class="mt-1 h-10 w-full rounded-lg border px-3 focus:border-blue-300 focus:ring-blue-500/20">
+              </div>
+            </template>
+          </div>
+
+          <!-- Cantidad de tomas de hidrante -->
+          <div x-show="usarHidrante">
+            <label class="block mb-1.5 text-sm font-medium text-gray-700">
+              Cantidad de Hidrantes
+            </label>
+            <input type="number" min="1" x-model.number="cantidadHidrante"
+              class="h-11 w-32 rounded-lg border px-4 focus:border-blue-300 focus:ring-blue-500/20" />
+
+            <!-- Campos dinámicos hidrante -->
+            <template x-for="i in cantidadHidrante" :key="i">
+              <div class="mt-2">
+                <label class="text-sm text-gray-600">
+                  Ubicación del Hidrante #<span x-text="i"></span>
+                </label>
+                <input type="text"
+                  class="mt-1 h-10 w-full rounded-lg border px-3 focus:border-blue-300 focus:ring-blue-500/20">
+              </div>
+            </template>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function formTomas() {
+    return {
+        usarUsuario: false,
+        usarHidrante: false,
+        cantidadUsuario: 1,
+        cantidadHidrante: 1,
+
+        init() {
+            this.$watch('usarUsuario', v => {
+                if (!v) this.cantidadUsuario = 1;
+            });
+
+            this.$watch('usarHidrante', v => {
+                if (!v) this.cantidadHidrante = 1;
+            });
+        }
+    }
+}
+</script>
+
+
+
+            </div>
+            <!-- ====== Form Elements Section End -->
+          </div>
+        </main>
+        <!-- ===== Main Content End ===== -->
+      </div>
+      <!-- ===== Content Area End ===== -->
+    </div>
+    <!-- ===== Page Wrapper End ===== -->
+
+
+  </body>
+</html>

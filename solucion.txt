@@ -1,0 +1,45 @@
+SOLUCIÓN (PowerShell: permitir scripts)
+
+1. Abre PowerShell como Administrador
+Clic derecho → "Ejecutar como administrador".
+
+2. Ejecuta este comando:
+Set-ExecutionPolicy RemoteSigned
+
+3. Te preguntará “¿Cambiar la política de ejecución?” → escribe:
+y
+
+4. Ahora prueba:
+npm -v
+
+OPCIÓN 1 — Rápido y fácil (Windows): instalar Node 20
+
+Descarga Node 20 LTS:
+👉 https://nodejs.org/en/download/prebuilt-installer
+
+Instálalo (solo siguiente–siguiente).
+
+Verifica:
+node -v
+npm -v
+
+OPCIÓN 2 — Mucho mejor: usar NVM para Windows (manejar varias versiones)
+
+Descarga NVM-Windows:
+👉 https://github.com/coreybutler/nvm-windows/releases
+
+Instala nvm-setup.exe
+
+Luego instala Node 20:
+nvm install 20
+nvm use 20
+
+4 Verifica:
+node -v
+npm -v
+
+Después de arreglar Node:
+
+Ya podrás instalar TailAdmin:
+npm install
+npm run dev
